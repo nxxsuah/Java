@@ -8,18 +8,35 @@ public class PolyTest {
 	public static void main(String[] args) {
 		
 		//다형성을 활용한 객체생성
-		Animal tiger = new Tiger(); //참조변수의 타입을 부모클래스로 선언 --> 업캐스팅: 다형성의 코드 표현
-		Animal eagle = new Eagle();
-		Animal shark = new Shark();
+		Animal a1 = new Tiger(); //참조변수의 타입을 부모클래스로 선언 --> 업캐스팅: 다형성의 코드 표현
+		Animal a2 = new Eagle();
+		Animal a3 = new Shark();
 		
-		tiger.move();
-		eagle.move();
-		shark.move();
+		a1.move();
+		a2.move();
+		a3.move();
 		
-		tiger.hunt ();
-		eagle.hunt ();
-		eagle.hunt ();
+		a1.hunt ();
+		a2.hunt ();
+		a3.hunt ();
 		
+		// 다운캐스팅 ?
+		Tiger tiger = (Tiger)a1; // 명시적 형변환
+		Eagle eagle = (Eagle)a2;
+		Shark shark = (Shark)a3;
+		
+		tiger.hunt();
+		eagle.hunt();
+		shark.hunt();
+		
+		//타입확인 연산 : a1이 Tiger를 지칭하는게 맞는지 물어보는 연산
+		if (a1 instanceof Tiger) {
+			System.out.println("a1은 Tiger 객체입니다");
+		} else if (a1 instanceof Eagle) {
+			System.out.println("a1은 Eagle 객체입니다");
+		} else if (a1 instanceof Shark) {
+			System.out.println("a1은 shark 객체입니다");
+		}	
 		
 		// 다형성 예제
 		/* 
