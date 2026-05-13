@@ -67,7 +67,7 @@ public class SetTest {
 		System.out.println("차집합 : " + minus);
 		
 		//-----------------------------------
-		// TreeSet 실습 
+		// TreeSet 실습  - 나무 모양대로 데이터 정렬을 자동으로 해준다
 		//-----------------------------------
 		
 		Set<Integer> scores = new TreeSet<>();
@@ -79,7 +79,7 @@ public class SetTest {
 		scores.add(70);
 		scores.add(70);
 		
-		System.out.println(scores);
+		System.out.println(scores); // 자동 오름차순 정렬
 	
 	}
 
