@@ -12,15 +12,18 @@ public class Test10 {
 		try {
 			File file = new File(path);
 			FileWriter fw = new FileWriter(file);
+			
 			for(int x=2 ; x<=9 ; x++) {
-				fw. ________________
+				fw.write(x + "단\n");
 				
 				for(int y=1 ; y<=9 ; y++) {
 					int z = x * y;
-					fw.____________________
+					fw.write(x + " x " + y + " = " + z + "\n");
 				}
 			}
+				
 			fw.close();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

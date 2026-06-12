@@ -12,12 +12,12 @@ import java.util.TreeSet;
 			}
 		}
 		
-		______________________ makeLotto() {
-			_______________ lottoSet = new HashSet<>();
+		public static Set<Integer> makeLotto() {
+			Set<Integer> lottoSet = new HashSet<>();
 			for(;;) {
-				int num = (int) Math.ceil(____________ );
+				int num = (int) Math.ceil(Math.random()*45);
 				lottoSet.add(num);
-				if( ________ ) {
+				if(lottoSet.size() == 6) {
 					break;
 				}
 			}

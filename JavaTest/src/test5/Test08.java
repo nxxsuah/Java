@@ -8,10 +8,16 @@ class Member {
 	String name;
 	int age;
 	
-	_________________________
+	Member(String id, String name, int age) {
+		this.id = id;
+		this.name = name;
+		this.age = age;				
+	}
 
 	@Override
-	________________________
+	public String toString() {
+		return id + ", " + name + " , " + age;
+	}
 
 	}
 
@@ -20,13 +26,14 @@ public class Test08 {
 		Member m1 = new Member("a101", "김유신", 23);
 		Member m2 = new Member("a102", "김춘추", 21);
 		Member m3 = new Member("a103", "장보고", 33);
-		_____________ memberList = new ArrayList<>();
+		
+		List<Member> memberList = new ArrayList<>();
 
 		memberList.add(m1);
 		memberList.add(m2);
 		memberList.add(m3);
 		
-		for(_________________ ) {
+		for(Member m : memberList) {
 			System.out.println(m);
 		}
 	}
