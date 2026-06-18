@@ -1,0 +1,218 @@
+/* =========================
+   Y2K 폰트
+========================= */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+
+/* =========================
+   기본 설정
+========================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Verdana, sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe8f7,
+            #e6f7ff,
+            #fff9d6
+        );
+
+    min-height: 100vh;
+}
+
+
+/* =========================
+   Todo App 컨테이너
+========================= */
+.container {
+
+    position: relative;
+    overflow: hidden;
+
+    width: 600px;
+    min-height: 420px;
+
+    margin: 50px auto;
+    padding: 30px;
+
+    border: 3px solid #444;
+    border-radius: 0;
+
+    background: #fffdf8;
+
+    box-shadow:
+        8px 8px 0 #b8c0ff;
+}
+
+
+/* =========================
+   배경 이모지
+========================= */
+#floating-container {
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+    z-index: 0;
+}
+
+.floating-icon {
+    position: absolute;
+
+    opacity: 0.12;
+    font-size: 28px;
+
+    user-select: none;
+}
+
+
+/* =========================
+   실제 Todo 내용
+========================= */
+.todo-content {
+    position: relative;
+    z-index: 10;
+}
+
+
+/* =========================
+   제목
+========================= */
+h3 {
+
+    margin-top: 0;
+
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20px;
+
+    color: #333;
+
+    text-shadow:
+        3px 3px 0 #b8f7d4;
+}
+
+p {
+    color: #666;
+    font-size: 14px;
+}
+
+
+/* =========================
+   입력 영역
+========================= */
+.input-group {
+
+    display: flex;
+    gap: 8px;
+
+    margin-bottom: 20px;
+}
+
+#inputTodo {
+
+    flex: 1;
+
+    padding: 12px;
+
+    border: 2px solid #444;
+
+    background: white;
+
+    outline: none;
+}
+
+#inputTodo:focus {
+
+    border-color: #ff8cc8;
+
+    box-shadow:
+        0 0 10px rgba(255,140,200,0.4);
+}
+
+
+/* =========================
+   추가 버튼
+========================= */
+#btnAdd {
+
+    width: 90px;
+
+    border: 2px solid #444;
+
+    background: #b8f7d4;
+
+    color: #333;
+
+    
+    font-size: 20px;
+
+    cursor: pointer;
+
+    box-shadow:
+        3px 3px 0 #444;
+}
+
+#btnAdd:hover {
+
+    transform: translate(2px, 2px);
+
+    box-shadow:
+        1px 1px 0 #444;
+}
+
+
+/* =========================
+   Todo 목록
+========================= */
+#todoList {
+
+    margin: 0;
+    padding-left: 0;
+}
+
+#todoList li {
+
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 10px;
+    padding: 12px;
+
+    border: 2px solid #cfd8ff;
+
+    background: #ffffff;
+
+    list-style: none;
+
+    box-shadow:
+        2px 2px 0 #dbe2ff;
+}
+
+
+/* =========================
+   삭제 버튼
+========================= */
+.delete-btn {
+
+    margin-left: auto;
+
+    border: none;
+    background: none;
+
+    color: #ff5c8a;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+
+    transform: scale(1.2);
+}
