@@ -1,164 +1,252 @@
-document.addEventListener('DOMContentLoaded', function () {
-
-    /* =========================
-       Todo 기능
-    ========================= */
+document.addEventListener('DOMContentLoaded', function(){
 
     const todoList = document.getElementById('todoList');
     const inputTodo = document.getElementById('inputTodo');
     const btnAdd = document.getElementById('btnAdd');
 
-    // localStorage에 저장된 Todo 목록 불러오기
+
+    // 저장된 데이터 불러오기
     let todos = JSON.parse(localStorage.getItem('todos')) || [];
 
-    // Todo 목록 저장
-    function saveTodoList() {
-        localStorage.setItem('todos', JSON.stringify(todos));
-    }
 
-    // Todo 목록 출력
-    function renderTodoList() {
+    // 화면 출력
+    renderTodo();
 
-        todoList.innerHTML = '';
-
-        todos.forEach(function (todo, index) {
-
-            const li = document.createElement('li');
-            li.textContent = todo;
-
-            const deleteBtn = document.createElement('button');
-            deleteBtn.textContent = '✕';
-            deleteBtn.className = 'delete-btn';
-
-            // Todo 삭제
-            deleteBtn.addEventListener('click', function () {
-
-                todos.splice(index, 1);
-
-                saveTodoList();
-                renderTodoList();
-            });
-
-            li.appendChild(deleteBtn);
-            todoList.appendChild(li);
-        });
-    }
-
-    // Todo 추가
-    function addTodo() {
-
-        const todoText = inputTodo.value.trim();
-
-        if (todoText === '') {
-            alert('할 일을 입력하세요.');
-            inputTodo.focus();
-            return;
-        }
-
-        todos.push(todoText);
-
-        saveTodoList();
-        renderTodoList();
-
-        inputTodo.value = '';
-        inputTodo.focus();
-    }
-
-    // 추가 버튼 클릭
-    btnAdd.addEventListener('click', addTodo);
-
-    // Enter 키 입력
-    inputTodo.addEventListener('keyup', function (e) {
-
-        if (e.key === 'Enter') {
-            addTodo();
-        }
-    });
-
-    // 최초 목록 출력
-    renderTodoList();
 
 
     /* =========================
-       컨테이너 배경 이모지
+        1. 데이터 등록
     ========================= */
 
+    btnAdd.addEventListener('click', function(){
+
+        const todoValue = inputTodo.value;
+
+
+        if(todoValue == ''){
+            alert('할 일을 입력하세요.');
+            return;
+        }
+
+
+        // 배열에 데이터 추가
+        todos.push(todoValue);
+
+
+        // 데이터 저장
+        saveTodo();
+
+
+        // 화면 다시 출력
+        renderTodo();
+
+
+        inputTodo.value = '';
+
+    });
+
+
+
+    // 데이터 화면 출력
+    function renderTodo(){
+
+        todoList.innerHTML = '';
+
+
+        todos.forEach(function(todo, index){
+
+
+            const li = document.createElement('li');
+
+            li.textContent = todo;
+
+
+            const deleteBtn = document.createElement('button');
+
+            deleteBtn.textContent = 'x';
+
+            deleteBtn.className = 'delete-btn';
+
+
+
+            deleteBtn.addEventListener('click', function(){
+
+                deleteTodo(index);
+
+            });
+
+
+
+            li.appendChild(deleteBtn);
+
+            todoList.appendChild(li);
+
+
+        });
+
+    }
+
+
+
+
+    /* =========================
+        2. 데이터 삭제 코드 작성
+    ========================= */
+
+    function deleteTodo(index){
+
+
+        // 배열에서 선택 데이터 삭제
+        todos.splice(index, 1);
+
+
+        // 변경 데이터 저장
+        saveTodo();
+
+
+        // 화면 다시 출력
+        renderTodo();
+
+
+    }
+
+
+
+
+
+    /* =========================
+        3. 데이터 저장 코드 작성
+        브라우저 새로고침시 추가한 데이터 유지
+    ========================= */
+
+    function saveTodo(){
+
+
+        // 배열 데이터를 문자열로 변환 후 저장
+        localStorage.setItem(
+            'todos',
+            JSON.stringify(todos)
+        );
+
+
+    }
+
+
+
+
+
+
+
+    /* =========================
+        4. 추가 기능
+        배경 이모지 애니메이션
+    ========================= */
+
+
     const icons = [
-        '🌊',
-		'📝',
-        '📚',
-        '💻',
-        '☕',
-        '🎧',
-        '⛺',
-        '🌿',
-        '✨',
-        '⭐',
-		'⚾',
-		'🏋️‍♀️',
-		'💙'
+        '🌊','📝','📚','💻',
+        '☕','🎧','⛺','🌿',
+        '✨','⭐','⚾','💙'
     ];
+
 
     const floatingContainer =
         document.getElementById('floating-container');
 
+
     const container =
         document.querySelector('.container');
 
-    // 각 이모지 생성
-    icons.forEach(function (emoji) {
 
-        const icon = document.createElement('span');
+
+    icons.forEach(function(emoji){
+
+
+        const icon =
+            document.createElement('span');
+
 
         icon.className = 'floating-icon';
+
         icon.textContent = emoji;
 
-        // 시작 위치
-        icon.x = Math.random() * (container.clientWidth - 50);
-        icon.y = Math.random() * (container.clientHeight - 50);
+
+        // 랜덤 위치
+        icon.x =
+            Math.random() * (container.clientWidth - 50);
+
+
+        icon.y =
+            Math.random() * (container.clientHeight - 50);
+
+
 
         // 이동 속도
-        icon.dx = (Math.random() - 0.5) * 0.3;
-        icon.dy = (Math.random() - 0.5) * 0.3;
+        icon.dx =
+            (Math.random() - 0.5) * 0.3;
+
+
+        icon.dy =
+            (Math.random() - 0.5) * 0.3;
+
+
 
         floatingContainer.appendChild(icon);
 
+
         moveIcon(icon);
+
+
     });
 
 
-    /* =========================
-       이모지 이동 애니메이션
-    ========================= */
 
-    function moveIcon(icon) {
 
-        function animate() {
+    function moveIcon(icon){
+
+
+        function animate(){
+
 
             icon.x += icon.dx;
+
             icon.y += icon.dy;
 
-            // 좌우 벽 충돌
-            if (icon.x < 0 ||
-                icon.x > container.clientWidth - 40) {
+
+
+            if(icon.x < 0 ||
+               icon.x > container.clientWidth - 40){
 
                 icon.dx *= -1;
+
             }
 
-            // 상하 벽 충돌
-            if (icon.y < 0 ||
-                icon.y > container.clientHeight - 40) {
+
+            if(icon.y < 0 ||
+               icon.y > container.clientHeight - 40){
 
                 icon.dy *= -1;
+
             }
 
+
+
             icon.style.left = icon.x + 'px';
+
             icon.style.top = icon.y + 'px';
 
+
+
             requestAnimationFrame(animate);
+
+
         }
 
+
         animate();
+
+
     }
+
 
 });
